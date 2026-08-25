@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malik Watches | Precision Watchmaking &amp; Custom Builds — Gainesville, VA</title>
+<meta name="description" content="Independent watchmaker in Gainesville, Virginia. Custom Seiko mods, full mechanical servicing, replica-friendly bench work, water-resistance testing. Mail-in service nationwide.">
+<meta property="og:title" content="Malik Watches — Precision Watchmaking & Custom Builds">
+<meta property="og:description" content="Custom mods, mechanical servicing, replica-friendly bench work. Mail-in service nationwide.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0d10;
+  --bg-2:#12151a;
+  --bg-3:#181c22;
+  --gold:#d4af37;
+  --gold-2:#f0d878;
+  --gold-dim:#8a7223;
+  --text:#e8e6e1;
+  --muted:#9a9890;
+  --line:rgba(212,175,55,.18);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.65;font-weight:300;overflow-x:hidden}
+::selection{background:var(--gold);color:#0b0d10}
+
+/* ---------- Nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:16px 5vw;background:rgba(11,13,16,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(212,175,55,.12)}
+.logo{font-family:var(--serif);font-size:1.35rem;letter-spacing:.35em;color:var(--gold);text-decoration:none;font-weight:600}
+.logo span{color:var(--text);font-weight:400}
+nav ul{display:flex;gap:34px;list-style:none}
+nav ul a{color:var(--muted);text-decoration:none;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;transition:color .25s}
+nav ul a:hover{color:var(--gold-2)}
+.nav-cta{border:1px solid var(--gold);color:var(--gold)!important;padding:8px 18px;border-radius:2px}
+.nav-cta:hover{background:var(--gold);color:#0b0d10!important}
+@media(max-width:820px){nav ul{display:none}}
+
+/* ---------- Hero ---------- */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:4vw;
+  padding:120px 6vw 60px;position:relative}
+.hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 72% 45%,rgba(212,175,55,.09),transparent 65%);pointer-events:none}
+.hero-copy h1{font-family:var(--serif);font-size:clamp(3rem,6.5vw,5.4rem);font-weight:600;line-height:1.04;letter-spacing:.02em}
+.hero-copy h1 em{font-style:italic;font-weight:400;
+  background:linear-gradient(100deg,var(--gold) 20%,var(--gold-2) 50%,var(--gold) 80%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  background-size:200% 100%;animation:shimmer 6s ease-in-out infinite}
+@keyframes shimmer{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
+.kicker{font-size:.75rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.hero-copy p{color:var(--muted);max-width:46ch;margin:26px 0 38px;font-size:1.05rem}
+.btn{display:inline-block;padding:15px 34px;text-decoration:none;font-size:.78rem;letter-spacing:.22em;
+  text-transform:uppercase;font-weight:500;border-radius:2px;transition:all .3s;cursor:pointer;border:1px solid var(--gold)}
+.btn-gold{background:var(--gold);color:#0b0d10}
+.btn-gold:hover{background:var(--gold-2);border-color:var(--gold-2);transform:translateY(-2px);box-shadow:0 12px 30px rgba(212,175,55,.25)}
+.btn-ghost{color:var(--gold);margin-left:14px}
+.btn-ghost:hover{background:rgba(212,175,55,.1)}
+.hero-watch{display:flex;justify-content:center;position:relative}
+.hero-watch svg{width:min(430px,80vw);height:auto;filter:drop-shadow(0 30px 60px rgba(0,0,0,.6))}
+@media(max-width:900px){.hero{grid-template-columns:1fr;text-align:center;padding-top:110px}
+  .hero-copy p{margin-inline:auto}.hero-watch{order:-1}.hero-watch svg{width:min(300px,70vw)}}
+
+/* watch animations */
+@keyframes rotSec{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes rotMin{from{transform:rotate(120deg)}to{transform:rotate(480deg)}}
+@keyframes rotHr{from{transform:rotate(305deg)}to{transform:rotate(665deg)}}
+@keyframes balance{0%{transform:rotate(-40deg)}50%{transform:rotate(40deg)}100%{transform:rotate(-40deg)}}
+.hand-sec{animation:rotSec 60s linear infinite;transform-origin:250px 250px}
+.hand-min{animation:rotMin 3600s linear infinite;transform-origin:250px 250px}
+.hand-hr{animation:rotHr 43200s linear infinite;transform-origin:250px 250px}
+.balance{animation:balance .8s cubic-bezier(.36,.07,.19,.97) infinite;transform-origin:250px 355px}
+@media(prefers-reduced-motion:reduce){
+  .hand-sec,.hand-min,.hand-hr,.balance,.hero-copy h1 em{animation:none}
+  .reveal{opacity:1!important;transform:none!important}}
+
+/* ---------- Sections ---------- */
+section{padding:110px 6vw;position:relative}
+.section-head{text-align:center;margin-bottom:64px}
+.section-head .kicker{margin-bottom:14px}
+.section-head h2{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:600}
+.section-head p{color:var(--muted);max-width:62ch;margin:16px auto 0}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.12s}.reveal.d2{transition-delay:.24s}.reveal.d3{transition-delay:.36s}
+
+/* ---------- Stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:2px;background:var(--line);
+  border:1px solid var(--line);max-width:1100px;margin:0 auto}
+.stat{background:var(--bg-2);padding:38px 20px;text-align:center}
+.stat b{display:block;font-family:var(--serif);font-size:2.6rem;color:var(--gold);font-weight:600;line-height:1}
+.stat span{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-top:10px}
+
+/* ---------- Services ---------- */
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:26px;max-width:1200px;margin:0 auto}
+.tier{background:linear-gradient(160deg,var(--bg-2),var(--bg-3));border:1px solid var(--line);border-radius:4px;
+  padding:42px 34px;position:relative;transition:transform .35s,box-shadow .35s,border-color .35s}
+.tier:hover{transform:translateY(-8px);border-color:rgba(212,175,55,.45);box-shadow:0 24px 50px rgba(0,0,0,.5)}
+.tier.featured{border-color:var(--gold)}
+.tier .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:#0b0d10;
+  font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;padding:5px 16px;border-radius:2px}
+.tier h3{font-family:var(--serif);font-size:1.55rem;font-weight:600;margin-bottom:6px}
+.tier .from{color:var(--muted);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase}
+.tier .amount{font-family:var(--serif);font-size:2.7rem;color:var(--gold);font-weight:600;margin:14px 0 6px}
+.tier .amount small{font-size:1rem;color:var(--muted);font-family:var(--sans);font-weight:300}
+.tier ul{list-style:none;margin:24px 0 30px}
+.tier li{padding:10px 0 10px 26px;border-bottom:1px solid rgba(255,255,255,.05);font-size:.92rem;color:#c9c7c0;position:relative}
+.tier li::before{content:'—';position:absolute;left:0;color:var(--gold)}
+.tier li:last-child{border-bottom:none}
+.tier .btn{width:100%;text-align:center}
+
+/* bench menu */
+.menu{max-width:900px;margin:70px auto 0;background:var(--bg-2);border:1px solid var(--line);border-radius:4px;padding:46px 50px}
+.menu h3{font-family:var(--serif);font-size:1.7rem;font-weight:600;text-align:center;margin-bottom:8px}
+.menu > p{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:30px}
+.menu-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 60px}
+.menu-item{display:flex;align-items:baseline;gap:8px;padding:11px 0;font-size:.93rem}
+.menu-item .dots{flex:1;border-bottom:1px dotted rgba(212,175,55,.35);transform:translateY(-4px)}
+.menu-item .p{color:var(--gold);font-weight:500;white-space:nowrap}
+@media(max-width:700px){.menu{padding:34px 24px}.menu-cols{grid-template-columns:1fr}}
+
+/* ---------- Rep & specialty ---------- */
+#specialty{background:linear-gradient(180deg,var(--bg) 0%,#0e1116 50%,var(--bg) 100%)}
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:26px;max-width:1200px;margin:0 auto}
+.spec-card{background:var(--bg-2);border:1px solid var(--line);border-radius:4px;padding:38px 32px;
+  transition:transform .35s,border-color .35s}
+.spec-card:hover{transform:translateY(-6px);border-color:rgba(212,175,55,.45)}
+.spec-card .num{font-family:var(--serif);font-size:2.4rem;color:var(--gold-dim);font-weight:600;line-height:1;margin-bottom:14px}
+.spec-card h3{font-family:var(--serif);font-size:1.45rem;font-weight:600;margin-bottom:6px}
+.spec-card .p-tag{color:var(--gold);font-size:.95rem;font-weight:500;margin-bottom:14px}
+.spec-card p{color:var(--muted);font-size:.92rem}
+.spec-note{max-width:820px;margin:50px auto 0;text-align:center;color:var(--muted);font-size:.95rem;
+  border:1px solid var(--line);border-radius:4px;padding:26px 34px;background:rgba(212,175,55,.04)}
+.spec-note b{color:var(--gold);font-weight:500}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:860px;margin:0 auto}
+.faq details{background:var(--bg-2);border:1px solid var(--line);border-radius:4px;margin-bottom:14px;overflow:hidden;
+  transition:border-color .3s}
+.faq details[open]{border-color:rgba(212,175,55,.5)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:22px 28px;font-size:1.02rem;font-weight:400;color:var(--text);user-select:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-family:var(--serif);font-size:1.7rem;color:var(--gold);line-height:1;
+  transition:transform .3s;flex-shrink:0}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq summary:hover{color:var(--gold-2)}
+.faq .a{padding:0 28px 24px;color:var(--muted);font-size:.94rem}
+.faq .a p{margin-bottom:12px}
+.faq .a p:last-child{margin-bottom:0}
+.faq .a b{color:var(--gold);font-weight:500}
+
+/* ---------- Process ---------- */
+.timeline{max-width:820px;margin:0 auto;position:relative;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:11px;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(180deg,transparent,var(--gold-dim) 15%,var(--gold-dim) 85%,transparent)}
+.t-step{position:relative;padding:0 0 54px 34px}
+.t-step:last-child{padding-bottom:0}
+.t-step::before{content:'';position:absolute;left:-35px;top:6px;width:13px;height:13px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--gold)}
+.t-step h3{font-family:var(--serif);font-size:1.5rem;font-weight:600;margin-bottom:8px}
+.t-step h3 small{font-family:var(--sans);font-size:.7rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;
+  display:block;margin-bottom:6px;font-weight:500}
+.t-step p{color:var(--muted);max-width:58ch}
+
+/* ---------- Contact ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:5vw;max-width:1150px;margin:0 auto;align-items:start}
+.contact-info h3{font-family:var(--serif);font-size:2rem;font-weight:600;margin-bottom:18px}
+.contact-info p{color:var(--muted);margin-bottom:26px}
+.contact-info .line{color:#c9c7c0;font-size:.95rem;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.contact-info .line b{color:var(--gold);font-weight:500;letter-spacing:.1em;font-size:.72rem;text-transform:uppercase;display:block}
+form{background:var(--bg-2);border:1px solid var(--line);border-radius:4px;padding:44px}
+.fg{margin-bottom:22px}
+.fg label{display:block;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+.fc{width:100%;background:var(--bg);border:1px solid rgba(255,255,255,.12);border-radius:3px;color:var(--text);
+  padding:14px 16px;font-family:var(--sans);font-size:.95rem;transition:border-color .25s}
+.fc:focus{outline:none;border-color:var(--gold)}
+textarea.fc{min-height:130px;resize:vertical}
+select.fc{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%23d4af37'/></svg>");background-repeat:no-repeat;background-position:right 16px center}
+form .btn{width:100%;text-align:center}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr}form{padding:30px 22px}}
+
+/* ---------- Footer ---------- */
+footer{border-top:1px solid var(--line);padding:44px 6vw;text-align:center;color:var(--muted);font-size:.82rem}
+footer .logo{display:inline-block;margin-bottom:12px}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#top">MALIK<span>WATCHES</span></a>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#specialty">Rep &amp; Specialty</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-cta">Request Quote</a></li>
+  </ul>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="hero-copy">
+    <div class="kicker">Independent Watchmaker · Gainesville, Virginia</div>
+    <h1>Time, rebuilt<br><em>by hand.</em></h1>
+    <p>Expert servicing for mechanical timepieces, custom Seiko modifications, and replica-friendly bench work most watchmakers refuse — every movement regulated on the timegrapher, every job photographed and documented.</p>
+    <a class="btn btn-gold" href="#contact">Request a Quote</a>
+    <a class="btn btn-ghost" href="#services">View Services</a>
+  </div>
+
+  <div class="hero-watch" aria-hidden="true">
+    <!-- Animated mechanical watch -->
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="dialGrad" cx="38%" cy="32%" r="80%">
+          <stop offset="0%" stop-color="#20242c"/><stop offset="100%" stop-color="#0d0f13"/>
+        </radialGradient>
+        <linearGradient id="caseGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f0d878"/><stop offset="45%" stop-color="#d4af37"/>
+          <stop offset="70%" stop-color="#8a7223"/><stop offset="100%" stop-color="#d4af37"/>
+        </linearGradient>
+      </defs>
+      <!-- lugs & crown -->
+      <rect x="215" y="8" width="70" height="40" rx="8" fill="url(#caseGrad)"/>
+      <rect x="215" y="452" width="70" height="40" rx="8" fill="url(#caseGrad)"/>
+      <rect x="468" y="235" width="26" height="30" rx="6" fill="url(#caseGrad)"/>
+      <!-- case -->
+      <circle cx="250" cy="250" r="228" fill="url(#caseGrad)"/>
+      <circle cx="250" cy="250" r="206" fill="#0d0f13"/>
+      <!-- bezel ticks -->
+      <g stroke="#d4af37" stroke-width="2" opacity=".85">
+        <g id="bt"><line x1="250" y1="30" x2="250" y2="46"/></g>
+        <use href="#bt" transform="rotate(30 250 250)"/><use href="#bt" transform="rotate(60 250 250)"/>
+        <use href="#bt" transform="rotate(90 250 250)"/><use href="#bt" transform="rotate(120 250 250)"/>
+        <use href="#bt" transform="rotate(150 250 250)"/><use href="#bt" transform="rotate(180 250 250)"/>
+        <use href="#bt" transform="rotate(210 250 250)"/><use href="#bt" transform="rotate(240 250 250)"/>
+        <use href="#bt" transform="rotate(270 250 250)"/><use href="#bt" transform="rotate(300 250 250)"/>
+        <use href="#bt" transform="rotate(330 250 250)"/>
+      </g>
+      <!-- dial -->
+      <circle cx="250" cy="250" r="188" fill="url(#dialGrad)" stroke="#2a2f38" stroke-width="1"/>
+      <!-- minute track -->
+      <g stroke="#4a4f58" stroke-width="1">
+        <g id="mt"><line x1="250" y1="66" x2="250" y2="74"/></g>
+        <use href="#mt" transform="rotate(6 250 250)"/><use href="#mt" transform="rotate(12 250 250)"/>
+        <use href="#mt" transform="rotate(18 250 250)"/><use href="#mt" transform="rotate(24 250 250)"/>
+        <use href="#mt" transform="rotate(36 250 250)"/><use href="#mt" transform="rotate(42 250 250)"/>
+        <use href="#mt" transform="rotate(48 250 250)"/><use href="#mt" transform="rotate(54 250 250)"/>
+        <use href="#mt" transform="rotate(66 250 250)"/><use href="#mt" transform="rotate(72 250 250)"/>
+        <use href="#mt" transform="rotate(78 250 250)"/><use href="#mt" transform="rotate(84 250 250)"/>
+        <use href="#mt" transform="rotate(96 250 250)"/><use href="#mt" transform="rotate(102 250 250)"/>
+        <use href="#mt" transform="rotate(108 250 250)"/><use href="#mt" transform="rotate(114 250 250)"/>
+        <use href="#mt" transform="rotate(126 250 250)"/><use href="#mt" transform="rotate(132 250 250)"/>
+        <use href="#mt" transform="rotate(138 250 250)"/><use href="#mt" transform="rotate(144 250 250)"/>
+        <use href="#mt" transform="rotate(156 250 250)"/><use href="#mt" transform="rotate(162 250 250)"/>
+        <use href="#mt" transform="rotate(168 250 250)"/><use href="#mt" transform="rotate(174 250 250)"/>
+      </g>
+      <!-- hour markers -->
+      <g fill="#d4af37">
+        <g id="hm"><rect x="245" y="78" width="10" height="30" rx="2"/></g>
+        <use href="#hm" transform="rotate(30 250 250)"/><use href="#hm" transform="rotate(60 250 250)"/>
+        <use href="#hm" transform="rotate(90 250 250)"/><use href="#hm" transform="rotate(120 250 250)"/>
+        <use href="#hm" transform="rotate(150 250 250)"/>
+        <use href="#hm" transform="rotate(210 250 250)"/><use href="#hm" transform="rotate(240 250 250)"/>
+        <use href="#hm" transform="rotate(270 250 250)"/><use href="#hm" transform="rotate(300 250 250)"/>
+        <use href="#hm" transform="rotate(330 250 250)"/>
+      </g>
+      <!-- open-heart balance wheel at 6 -->
+      <circle cx="250" cy="355" r="42" fill="#07080b" stroke="#2a2f38" stroke-width="2"/>
+      <g class="balance">
+        <circle cx="250" cy="355" r="30" fill="none" stroke="#d4af37" stroke-width="3"/>
+        <line x1="222" y1="355" x2="278" y2="355" stroke="#d4af37" stroke-width="3"/>
+        <line x1="250" y1="327" x2="250" y2="383" stroke="#d4af37" stroke-width="2" opacity=".6"/>
+        <circle cx="250" cy="355" r="4" fill="#f0d878"/>
+      </g>
+      <!-- brand -->
+      <text x="250" y="178" text-anchor="middle" fill="#d4af37" font-family="Georgia,serif" font-size="21" letter-spacing="6">MALIK</text>
+      <text x="250" y="200" text-anchor="middle" fill="#7a7f88" font-family="Georgia,serif" font-size="10" letter-spacing="3">AUTOMATIC</text>
+      <!-- hands -->
+      <g class="hand-hr"><rect x="243" y="140" width="14" height="118" rx="7" fill="#e8e6e1"/><rect x="246.5" y="150" width="7" height="90" rx="3.5" fill="#0d0f13" opacity=".35"/></g>
+      <g class="hand-min"><rect x="245" y="95" width="10" height="163" rx="5" fill="#e8e6e1"/><rect x="247.5" y="105" width="5" height="135" rx="2.5" fill="#0d0f13" opacity=".35"/></g>
+      <g class="hand-sec"><line x1="250" y1="250" x2="250" y2="86" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/><line x1="250" y1="250" x2="250" y2="288" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/></g>
+      <circle cx="250" cy="250" r="9" fill="#d4af37"/><circle cx="250" cy="250" r="4" fill="#0d0f13"/>
+    </svg>
+  </div>
+</header>
+
+<!-- ================= STATS ================= -->
+<section style="padding-top:0">
+  <div class="stats reveal">
+    <div class="stat"><b data-count="200">0</b><span>Movements Serviced</span></div>
+    <div class="stat"><b data-count="75">0</b><span>Custom Builds Delivered</span></div>
+    <div class="stat"><b data-count="10">0</b><span>Years at the Bench</span></div>
+    <div class="stat"><b data-count="100">0</b><span>% Work Documented</span></div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services">
+  <div class="section-head reveal">
+    <div class="kicker">Services &amp; Pricing</div>
+    <h2>Bench Work, Priced Honestly</h2>
+    <p>I do this because I love it — pricing covers Swiss materials and the next tool for the bench, not a storefront. Every estimate is confirmed after inspection, and you approve any parts before work begins.</p>
+  </div>
+
+  <div class="tiers">
+    <div class="tier reveal d1">
+      <h3>Custom Mod Build</h3>
+      <div class="from">Labor, plus your parts</div>
+      <div class="amount">$150<small> 3-hand</small></div>
+      <div class="from" style="margin-bottom:4px">$250 for chronographs — smaller hands, more complex movements</div>
+      <ul>
+        <li>Case, dial &amp; movement assembly</li>
+        <li>Custom handset fitting &amp; alignment</li>
+        <li>Water-resistance pressure testing</li>
+        <li>Final timegrapher regulation</li>
+      </ul>
+      <a class="btn btn-ghost" style="margin-left:0" href="#contact">Start a Build</a>
+    </div>
+
+    <div class="tier featured reveal d2">
+      <div class="tag">Most Requested</div>
+      <h3>Full Service</h3>
+      <div class="from">Starting at</div>
+      <div class="amount">$200<small> time-only · $250 chronograph</small></div>
+      <ul>
+        <li>Complete teardown — every single part</li>
+        <li>Ultrasonic cleaning in L&amp;R solutions</li>
+        <li>Swiss Moebius oils &amp; greases, applied to spec</li>
+        <li>Reassembly, demagnetization &amp; regulation</li>
+        <li>Oils last ~7 years before the next service</li>
+        <li>Premium calibers (e.g. cal. 324 / 330 class): $300</li>
+      </ul>
+      <a class="btn btn-gold" href="#contact">Request Service</a>
+    </div>
+
+    <div class="tier reveal d3">
+      <h3>Evaluation &amp; Repair</h3>
+      <div class="from">Mail-in diagnosis</div>
+      <div class="amount">$50<small> + shipping</small></div>
+      <ul>
+        <li>Full bench inspection under magnification</li>
+        <li>If it's just something loose — fixed within the eval</li>
+        <li>Photo &amp; video documentation of everything found</li>
+        <li>Broken parts quoted separately, approved by you first</li>
+        <li>Replica &amp; homage watches welcome</li>
+      </ul>
+      <a class="btn btn-ghost" style="margin-left:0" href="#contact">Mail It In</a>
+    </div>
+  </div>
+
+  <div class="menu reveal">
+    <h3>À La Carte Bench Menu</h3>
+    <p>Labor pricing — parts, when needed, are quoted separately for your approval.</p>
+    <div class="menu-cols">
+      <div class="menu-item"><span>Evaluation &amp; diagnosis (mail-in)</span><span class="dots"></span><span class="p">$50</span></div>
+      <div class="menu-item"><span>Regulation on the timegrapher</span><span class="dots"></span><span class="p">$50</span></div>
+      <div class="menu-item"><span>Water-resistance seal service &amp; 6-bar test</span><span class="dots"></span><span class="p">$50</span></div>
+      <div class="menu-item"><span>Rotor silencing</span><span class="dots"></span><span class="p">$30</span></div>
+      <div class="menu-item"><span>Demagnetization</span><span class="dots"></span><span class="p">$20</span></div>
+      <div class="menu-item"><span>Full service — time-only movement</span><span class="dots"></span><span class="p">$200</span></div>
+      <div class="menu-item"><span>Full service — chronograph</span><span class="dots"></span><span class="p">$250</span></div>
+      <div class="menu-item"><span>Premium caliber service (324 / 330 class)</span><span class="dots"></span><span class="p">$300</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REP & SPECIALTY ================= -->
+<section id="specialty">
+  <div class="section-head reveal">
+    <div class="kicker">The Work Others Turn Away</div>
+    <h2>Replica &amp; Specialty Bench Work</h2>
+    <p>Most watchmakers refuse to touch replica and homage watches. I don't. A rep with a well-serviced movement running Swiss oils is a different watch — quieter, more accurate, and built to last years instead of months.</p>
+  </div>
+
+  <div class="spec-grid">
+    <div class="spec-card reveal d1">
+      <div class="num">01</div>
+      <h3>Mail-In Evaluation</h3>
+      <div class="p-tag">$50 — you cover shipping both ways</div>
+      <p>Ship your watch in and I'll open it up and find out what's actually going on. If it's just something loose or out of place, the fix is included in the eval. If parts are broken, you get a documented, photographed diagnosis and a quote before anything else happens. Rep movements are inexpensive — worst case, a complete movement replacement runs around $200 (super clones aside), but it rarely gets that far.</p>
+    </div>
+
+    <div class="spec-card reveal d2">
+      <div class="num">02</div>
+      <h3>Full Service, Swiss Materials</h3>
+      <div class="p-tag">$200 time-only · $250 chronograph</div>
+      <p>Factories ship reps with cheap oils — over-applied, sometimes with machine debris still in the gear train. A full service means every single part comes out, gets cleaned ultrasonically in L&amp;R solutions, and goes back together with Swiss Moebius lubricants applied jewel by jewel. The movement runs quieter, keeps better time, and won't need attention for around 7 years. Others charge $400+ for the same work.</p>
+    </div>
+
+    <div class="spec-card reveal d3">
+      <div class="num">03</div>
+      <h3>Water-Resistance Service</h3>
+      <div class="p-tag">$50 — seal service + pressure test</div>
+      <p>The only things keeping your movement dry are the gaskets and their lubrication. I remove the movement first (so a leak can't damage it), service the seals on the case back, crown, and crown tube — replacing any that are hardened, punctured, or the wrong size — then pressure-test the sealed case to 6 bar (60&nbsp;m). Honest expectations: this is splash and maybe pool-level protection, never diving.</p>
+    </div>
+  </div>
+
+  <div class="spec-note reveal">
+    <b>Why so reasonable?</b> This is a passion, not a storefront. Pricing covers the expensive part — L&amp;R cleaning solutions and Moebius oils — and leaves a little for the next tool on the bench. Every job is recorded, so you see exactly what was found and what was done.
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="section-head reveal">
+    <div class="kicker">Straight Answers</div>
+    <h2>Frequently Asked Questions</h2>
+  </div>
+
+  <div class="faq reveal">
+    <details>
+      <summary>Do you work on replica and homage watches?</summary>
+      <div class="a"><p>Yes — it's a specialty. Most watchmakers refuse them; I treat them like any other mechanical watch. Mail it in, pay <b>$50 for the evaluation</b> plus shipping, and you'll get a photographed diagnosis. If it's just something loose, the fix is included in the eval fee.</p></div>
+    </details>
+
+    <details>
+      <summary>What exactly does a "full service" include?</summary>
+      <div class="a">
+        <p>A full service is a complete teardown — every single part comes out of the watch. Parts are cleaned in an ultrasonic bath with professional <b>L&amp;R cleaning solutions</b>, then the movement is reassembled with <b>Swiss Moebius oils and greases</b> applied to specific jewels, pivots, and gears. Finished with demagnetization and multi-position regulation on the timegrapher.</p>
+        <p><b>$200</b> for time-only movements, <b>$250</b> for chronographs, <b>$300</b> for premium calibers (324 / 330 class). These oils last about <b>7 years</b> before the next service is due. Comparable work elsewhere runs $400+.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>My watch runs — do I even need a service?</summary>
+      <div class="a"><p>It's optional, and I'll tell you honestly if yours can wait. But factories — especially rep factories — use cheap oils, over-oil the movements, and sometimes leave machine debris in the gear train. A proper service noticeably <b>quiets the movement</b>, improves timekeeping, and protects it for years. If your watch is running slow, I can regulate it for <b>$50</b>, but without finding the underlying cause it can be a losing battle — a teardown finds the real problem.</p></div>
+    </details>
+
+    <details>
+      <summary>How does the water-resistance service work?</summary>
+      <div class="a">
+        <p>Lubrication and seals are the only two things keeping your movement dry. Rubber gaskets harden and get brittle over time — if a seal is broken, punctured, hardened, or the wrong size, water gets in.</p>
+        <p>For <b>$50</b>, I remove the movement first (so if the case leaks under test, there's nothing inside to ruin), then remove, lubricate, and re-seat the gaskets on the <b>case back, crown, and crown tube</b> — replacing any that are past saving — and pressure-test the sealed case to <b>6 bar (60&nbsp;m)</b> to confirm the seals hold.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>So my watch will be waterproof after testing?</summary>
+      <div class="a"><p>No — and anyone who promises otherwise is overselling. Even a watch that passes at 6 bar is <b>not meant for swimming or diving</b>; think rain and hand-washing, maybe a pool at best. And if the case itself leaks due to a manufacturing defect, there's no fix that wouldn't cost more than the watch. The seal service keeps an honest watch honest — it doesn't turn it into a diver.</p></div>
+    </details>
+
+    <details>
+      <summary>What if something is broken — what will parts cost?</summary>
+      <div class="a"><p>Parts are always quoted separately and <b>you approve them before any work continues</b>. Every step is recorded, so you'll see exactly what's broken. Rep movement parts are generally inexpensive — a complete movement replacement worst-case runs around <b>$200</b> (super clones can be more), but most problems turn out to be far smaller.</p></div>
+    </details>
+
+    <details>
+      <summary>My rotor is loud — can you fix that?</summary>
+      <div class="a"><p>Rotor silencing is a quick job — remove the rotor, lubricate it properly, and reinstall. <b>$30</b>. If I spot obvious debris while I'm in there through the case back, I'll clean what's visible; a true cleaning of the whole movement is what the full service is for.</p></div>
+    </details>
+
+    <details>
+      <summary>How does shipping work?</summary>
+      <div class="a"><p>You mail the watch to me in <b>Gainesville, Virginia</b> and cover shipping both ways — I recommend insured, tracked shipping. Once I've received it, you'll get the evaluation results with photos before anything is done. Nationwide mail-in service; international by arrangement.</p></div>
+    </details>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section id="process">
+  <div class="section-head reveal">
+    <div class="kicker">How It Works</div>
+    <h2>The Process</h2>
+  </div>
+  <div class="timeline">
+    <div class="t-step reveal"><h3><small>Step 01</small>Intake &amp; Quote</h3>
+      <p>Submit your watch details and requested service. You'll receive a preliminary cost breakdown and insured shipping instructions within 48 hours.</p></div>
+    <div class="t-step reveal"><h3><small>Step 02</small>Diagnostic &amp; Approval</h3>
+      <p>Your timepiece undergoes a full bench inspection under magnification and on the timegrapher. Work begins only after you approve the itemized findings — with photos of anything broken.</p></div>
+    <div class="t-step reveal"><h3><small>Step 03</small>Bench Work</h3>
+      <p>Disassembly, ultrasonic cleaning in L&amp;R solutions, Moebius lubrication to spec, and reassembly — recorded at each stage so you can see exactly what was done.</p></div>
+    <div class="t-step reveal"><h3><small>Step 04</small>Testing &amp; Return</h3>
+      <p>Multi-position regulation, power-reserve observation, and pressure testing where applicable, before your watch is securely packed and shipped back.</p></div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" style="padding-bottom:80px">
+  <div class="section-head reveal">
+    <div class="kicker">Get In Touch</div>
+    <h2>Request Service</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <h3>The workshop is open.</h3>
+      <p>Every inquiry is answered personally. Describe your piece and what you'd like done — photos help, and you can attach them when the email opens.</p>
+      <div class="line"><b>Location</b>Gainesville, Virginia — mail-in service nationwide</div>
+      <div class="line"><b>Email</b>service@malikwatches.com</div>
+      <div class="line"><b>Evaluation</b>$50 + shipping · photographed diagnosis before any work</div>
+      <div class="line"><b>Documentation</b>Every job recorded — you see everything found</div>
+    </div>
+    <form id="quoteForm" class="reveal d1">
+      <div class="fg"><label for="name">Full Name</label><input class="fc" id="name" required></div>
+      <div class="fg"><label for="email">Email Address</label><input class="fc" id="email" type="email" required></div>
+      <div class="fg"><label for="watch">Watch Model &amp; Movement</label><input class="fc" id="watch" placeholder="e.g., Seiko SKX007, rep Submariner, custom build" required></div>
+      <div class="fg"><label for="svc">Service Requested</label>
+        <select class="fc" id="svc" required>
+          <option value="">Select a service…</option>
+          <option>Evaluation &amp; Diagnosis ($50 + shipping)</option>
+          <option>Full Service — time-only ($200)</option>
+          <option>Full Service — chronograph ($250)</option>
+          <option>Custom Mod Build ($150 / $250 chrono + parts)</option>
+          <option>Water-Resistance Seal Service &amp; Test ($50)</option>
+          <option>Regulation ($50)</option>
+          <option>Rotor Silencing ($30)</option>
+          <option>Other Inquiry</option>
+        </select></div>
+      <div class="fg"><label for="msg">Project Details</label><textarea class="fc" id="msg" placeholder="Current condition, what it's doing (or not doing), parts you've sourced…" required></textarea></div>
+      <button type="submit" class="btn btn-gold">Open Email &amp; Send Inquiry</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <a class="logo" href="#top">MALIK<span>WATCHES</span></a>
+  <p>&copy; 2026 Malik Watches. All rights reserved.</p>
+  <p>Gainesville, Virginia · malikwatches.com</p>
+</footer>
+
+<script>
+/* ============ CONFIG — change your email here ============ */
+var BENCH_EMAIL = 'service@malikwatches.com';
+
+/* ============ Scroll reveal ============ */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+/* ============ Animated counters ============ */
+var cio = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting) return;
+    var el = e.target, target = +el.dataset.count, t0 = null;
+    function tick(ts){ if(!t0) t0 = ts; var p = Math.min((ts-t0)/1400,1);
+      el.textContent = Math.round(target * (1-Math.pow(1-p,3))) + (target===100?'%':'+');
+      if(p<1) requestAnimationFrame(tick); }
+    requestAnimationFrame(tick); cio.unobserve(el);
+  });
+},{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
+
+/* ============ Contact form → mailto ============ */
+var $ = function(id){ return document.getElementById(id); };
+$('quoteForm').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  var body = ['Name: ' + $('name').value, 'Email: ' + $('email').value,
+    'Watch: ' + $('watch').value, 'Service: ' + $('svc').value, '', $('msg').value].join('\n');
+  location.href = 'mailto:' + BENCH_EMAIL +
+    '?subject=' + encodeURIComponent('Service Inquiry — ' + $('svc').value) +
+    '&body=' + encodeURIComponent(body);
+});
+</script>
+</body>
+</html>
