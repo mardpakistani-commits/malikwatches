@@ -67,17 +67,12 @@ nav ul a:hover{color:var(--gold-2)}
 @media(max-width:900px){.hero{grid-template-columns:1fr;text-align:center;padding-top:110px}
   .hero-copy p{margin-inline:auto}.hero-watch{order:-1}.hero-watch svg{width:min(300px,70vw)}}
 
-/* watch animations */
-@keyframes rotSec{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-@keyframes rotMin{from{transform:rotate(120deg)}to{transform:rotate(480deg)}}
-@keyframes rotHr{from{transform:rotate(305deg)}to{transform:rotate(665deg)}}
+/* watch animations — hands are driven by JS to show the visitor's local time */
 @keyframes balance{0%{transform:rotate(-40deg)}50%{transform:rotate(40deg)}100%{transform:rotate(-40deg)}}
-.hand-sec{animation:rotSec 60s linear infinite;transform-origin:250px 250px}
-.hand-min{animation:rotMin 3600s linear infinite;transform-origin:250px 250px}
-.hand-hr{animation:rotHr 43200s linear infinite;transform-origin:250px 250px}
+.hand-sec,.hand-min,.hand-hr{transform-origin:250px 250px}
 .balance{animation:balance .8s cubic-bezier(.36,.07,.19,.97) infinite;transform-origin:250px 355px}
 @media(prefers-reduced-motion:reduce){
-  .hand-sec,.hand-min,.hand-hr,.balance,.hero-copy h1 em{animation:none}
+  .balance,.hero-copy h1 em{animation:none}
   .reveal{opacity:1!important;transform:none!important}}
 
 /* ---------- Sections ---------- */
@@ -284,10 +279,10 @@ footer .logo{display:inline-block;margin-bottom:12px}
       <!-- brand -->
       <text x="250" y="178" text-anchor="middle" fill="#d4af37" font-family="Georgia,serif" font-size="21" letter-spacing="6">MALIK</text>
       <text x="250" y="200" text-anchor="middle" fill="#7a7f88" font-family="Georgia,serif" font-size="10" letter-spacing="3">AUTOMATIC</text>
-      <!-- hands -->
-      <g class="hand-hr"><rect x="243" y="140" width="14" height="118" rx="7" fill="#e8e6e1"/><rect x="246.5" y="150" width="7" height="90" rx="3.5" fill="#0d0f13" opacity=".35"/></g>
-      <g class="hand-min"><rect x="245" y="95" width="10" height="163" rx="5" fill="#e8e6e1"/><rect x="247.5" y="105" width="5" height="135" rx="2.5" fill="#0d0f13" opacity=".35"/></g>
-      <g class="hand-sec"><line x1="250" y1="250" x2="250" y2="86" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/><line x1="250" y1="250" x2="250" y2="288" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/></g>
+      <!-- hands (set to the visitor's local time by JS) -->
+      <g class="hand-hr" id="heroHr"><rect x="243" y="140" width="14" height="118" rx="7" fill="#e8e6e1"/><rect x="246.5" y="150" width="7" height="90" rx="3.5" fill="#0d0f13" opacity=".35"/></g>
+      <g class="hand-min" id="heroMin"><rect x="245" y="95" width="10" height="163" rx="5" fill="#e8e6e1"/><rect x="247.5" y="105" width="5" height="135" rx="2.5" fill="#0d0f13" opacity=".35"/></g>
+      <g class="hand-sec" id="heroSec"><line x1="250" y1="250" x2="250" y2="86" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/><line x1="250" y1="250" x2="250" y2="288" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/></g>
       <circle cx="250" cy="250" r="9" fill="#d4af37"/><circle cx="250" cy="250" r="4" fill="#0d0f13"/>
     </svg>
   </div>
@@ -298,7 +293,7 @@ footer .logo{display:inline-block;margin-bottom:12px}
   <div class="stats reveal">
     <div class="stat"><b data-count="200">0</b><span>Movements Serviced</span></div>
     <div class="stat"><b data-count="75">0</b><span>Custom Builds Delivered</span></div>
-    <div class="stat"><b data-count="5">0</b><span>Years at the Bench</span></div>
+    <div class="stat"><b data-count="10">0</b><span>Years at the Bench</span></div>
     <div class="stat"><b data-count="100">0</b><span>% Work Documented</span></div>
   </div>
 </section>
@@ -337,7 +332,7 @@ footer .logo{display:inline-block;margin-bottom:12px}
         <li>Swiss Moebius oils &amp; greases, applied to spec</li>
         <li>Reassembly, demagnetization &amp; regulation</li>
         <li>Oils last ~7 years before the next service</li>
-        <li>Premium calibers (e.g. cal. 324 / 330 class): $300</li>
+        <li>Premium calibers (Rolex 3135 / 3235, cal. 324 / 330 class): $300</li>
       </ul>
       <a class="btn btn-gold" href="#contact">Request Service</a>
     </div>
@@ -368,7 +363,7 @@ footer .logo{display:inline-block;margin-bottom:12px}
       <div class="menu-item"><span>Demagnetization</span><span class="dots"></span><span class="p">$20</span></div>
       <div class="menu-item"><span>Full service — time-only movement</span><span class="dots"></span><span class="p">$250</span></div>
       <div class="menu-item"><span>Full service — chronograph</span><span class="dots"></span><span class="p">$300</span></div>
-      <div class="menu-item"><span>Premium caliber service (324 / 330 class)</span><span class="dots"></span><span class="p">$300</span></div>
+      <div class="menu-item"><span>Premium calibers (Rolex 3135 / 3235, 324 / 330)</span><span class="dots"></span><span class="p">$300</span></div>
     </div>
   </div>
 </section>
@@ -426,7 +421,7 @@ footer .logo{display:inline-block;margin-bottom:12px}
       <summary>What exactly does a "full service" include?</summary>
       <div class="a">
         <p>A full service is a complete teardown — every single part comes out of the watch. Parts are cleaned in an ultrasonic bath with professional <b>L&amp;R cleaning solutions</b>, then the movement is reassembled with <b>Swiss Moebius oils and greases</b> applied to specific jewels, pivots, and gears. Finished with demagnetization and multi-position regulation on the timegrapher.</p>
-        <p><b>$200</b> for time-only movements, <b>$250</b> for chronographs, <b>$300</b> for premium calibers (324 / 330 class). These oils last about <b>7 years</b> before the next service is due. Comparable work elsewhere runs $400+.</p>
+        <p><b>$250</b> for time-only movements, <b>$300</b> for chronographs, <b>$300</b> for premium calibers (Rolex 3135 / 3235, cal. 324 / 330 class). These oils last about <b>7 years</b> before the next service is due. Comparable work elsewhere runs $400+.</p>
       </div>
     </details>
 
@@ -506,8 +501,9 @@ footer .logo{display:inline-block;margin-bottom:12px}
         <select class="fc" id="svc" required>
           <option value="">Select a service…</option>
           <option>Evaluation &amp; Diagnosis ($50 + shipping)</option>
-          <option>Full Service — time-only ($200)</option>
-          <option>Full Service — chronograph ($250)</option>
+          <option>Full Service — time-only ($250)</option>
+          <option>Full Service — chronograph ($300)</option>
+          <option>Premium Caliber Service — Rolex 3135/3235, 324/330 ($300)</option>
           <option>Custom Mod Build ($150 / $250 chrono + parts)</option>
           <option>Water-Resistance Seal Service &amp; Test ($50)</option>
           <option>Regulation ($50)</option>
@@ -529,6 +525,24 @@ footer .logo{display:inline-block;margin-bottom:12px}
 <script>
 /* ============ CONFIG — change your email here ============ */
 var BENCH_EMAIL = 'service@malikwatches.com';
+
+/* ============ Hero watch shows the visitor's local time ============ */
+(function(){
+  var hr = document.getElementById('heroHr'),
+      mn = document.getElementById('heroMin'),
+      sc = document.getElementById('heroSec');
+  function setHands(){
+    var d = new Date(),
+        s = d.getSeconds() + d.getMilliseconds()/1000,
+        m = d.getMinutes() + s/60,
+        h = (d.getHours() % 12) + m/60;
+    sc.style.transform = 'rotate(' + (s*6) + 'deg)';
+    mn.style.transform = 'rotate(' + (m*6) + 'deg)';
+    hr.style.transform = 'rotate(' + (h*30) + 'deg)';
+    requestAnimationFrame(setHands);
+  }
+  requestAnimationFrame(setHands);
+})();
 
 /* ============ Scroll reveal ============ */
 var io = new IntersectionObserver(function(entries){
